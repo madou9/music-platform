@@ -17,7 +17,7 @@
           </li>
 
           <li v-if="!userStore.userLoggedIn">
-            <a class="px-2 text-white" href="#" @click.prevent="toggleAuthModal"
+            <a class="px-2 text-white"  @click.prevent="toggleAuthModal"
               >Login / Register</a
             >
           </li>
@@ -28,12 +28,7 @@
               >
             </li>
             <li>
-              <router-link
-                class="px-2 text-white"
-                href="#"
-                @click.prevent="userStore.signOut"
-                >Logout</router-link
-              >
+              <button class="px-2 text-white" @click="signOut">Logout</button>
             </li>
           </template>
         </ul>
@@ -57,6 +52,15 @@ export default {
       this.modalStore.isOpen = !this.modalStore.isOpen;
       console.log(this.modalStore.isOpen);
     },
+    signOut() {
+  this.userStore.signOut();
+  console.log("Current route:", this.$route.name);
+
+  if (this.$route.name === "manage") {
+    this.$router.push({ name: "home" });
+  }
+}
+
   },
 };
 </script>
